@@ -1,12 +1,12 @@
 {
   "name": "nodeproductionsetup",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "dist":"npx tsc",  
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon src/server.ts",
     "prepare": "husky",
-    "start": "node dist/index.js"
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
