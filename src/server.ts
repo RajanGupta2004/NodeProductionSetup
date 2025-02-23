@@ -1,23 +1,29 @@
+import app from "./app";
 import config from "./config/config";
 
-console.log(config)
 
+const server = app.listen(config.PORT);
 
-import express, { Request, Response } from "express";
-import dotenv from "dotenv";
+     ;(() => {
+        try {
+            // database connection
+            console.info("Application stated", {
+                meta: {
+                    PORT: config.PORT,
+                    SERVER_URL: config.SERVER_URL,
+                    DBURL: config.DB_URL
+                }
+            })
 
-dotenv.config();
+        } catch (error) {
+            console.error("APPLICATION ERROR", { meta: { error } })
+            server.close((error) => {
+                if (error) {
+                    console.error("APPICATION ERROR", { meta: { error } })
+                }
+            })
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+            process.exit(1)
 
-app.use(express.json());
-
-app.get("/", (req: Request, res: Response) => {
-    console.log(req)
-    res.send("Hello, TypeScript with Node.js!");
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+        }
+    })()
